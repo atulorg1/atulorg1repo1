@@ -25,6 +25,7 @@ build:
       default_value: "value1"
     - name: "param2"
       type: boolean
+      default_value: false
 
 
 environments:
