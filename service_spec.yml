@@ -1,41 +1,26 @@
 service_name: some-service
 
 lint:
-  # Specify the target in Makefile for static code analysis
   target: lint
 
 test:
-  # Specify the target in Makefile for CI. This should run your tests
-  # Env variables for these need to be specified in Orca UI
   target: test
 
 build:
-  # Specify the target in Makefile for build stage.
-  # This should build the docker container and also any pre-deploy stuff (like pushing assets to S3 for e.g.)
-  # Env variables for these need to be specified in Orca UI
   target: build
 
 environments:
 - name: dev
   tier: 3
-  # Env variables for these need to be specified in Orca UI
   containers:
-  ...
 
   regions:
-  ....
     service_distribution:
-      # [s3|docker_registry]
       type: s3
-      ...
 
 - name: stage
-  # Env variables for these need to be specified in Orca UI
   tier: 2
-  ...
 
 - name: prod
-  # Env variables for these need to be specified in Orca UI
   tier: 1
-  ...
 
