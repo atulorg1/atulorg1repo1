@@ -1,4 +1,4 @@
-service_name: some-service
+service_name: HelloOrca1
 
 # Version lock the platform dependency.
 # Use semantic versioning.
