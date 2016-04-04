@@ -14,23 +14,6 @@ slack:
   username: user1
   channel: channel1
 
-# Optional. Jenkins build related parameters.
-build:
-  # Optional.
-  jenkins:
-    rollback: false
-    # Optional.
-    params:
-    # Optional. Name of the Jenkins parameter.
-    - name: param1
-      # Required. Allowed values string/boolean
-      type: string
-      # Optional. Default value of this parameter
-      default_value: value1
-    - name: param2
-      type: boolean
-
-
 # Required.
 environments:
 # name is an opaque string but must match /^[0-9a-zA-Z]+$/
@@ -45,7 +28,7 @@ environments:
   # check of `GET /health HTTP/1.1`
 
   # Required. "type" is one of DEV/STAGE/PROD. Based on this appropriate Mesos cluster may get selected.
-  type: DEV
+  cluster_type: DEV
   # Required. List of containers for the service.
   containers:
   # see footnote [1]
@@ -60,27 +43,20 @@ environments:
     # Optional. override CMD. e.g., `docker run image:latest <docker_run_cmd>`
     docker_run_cmd: --opt foo
     # Optional. Required, if one or more ports need to be exposed. Comma separated list of exposed ports.
-    exposed_ports: 3000, 3001
+    inet_port: 3000, 3001
     # Required. HTTP GET is assumed here.
     health_check:
       path: /health
     # Optional. (Default = 1). Number of containers for this service
-    num_containers: 3
+    instances: 3
     # Optional. (Default = 0.5) Number of CPU(s) Required by this container.
     cpus: 1.5
     # Optional. (Default = 512). Memory required by this container.
     mem: 1024
-    # Optional. Create a single instance of this container [1]. Porter specific. Ignored by Ethos.
-    instances: 1
-    # Optional. Volumes which need to mounted to container
-    volumes: { /var/vol1: /usr/src/vol1,
-      /var/vol2: /usr/src/vol2,
-      /var/vol3: /usr/src/vol3 }
 
   - id: hello-orca-migrate-db
     topology: worker
     docker_run_cmd: --opt foo
-    num_containers: 1
     cpus: 0.5
     mem: 512
     instances: 1
@@ -119,19 +95,12 @@ environments:
       # docker_registry_url: http://somedomain.com
 
   # Optional
-  jenkins:
-    rollback: false
-    params:
-    - name: param2
-      type: string
-      default_value: value2
-    - name: param3
-      type: boolean
-      default_value: true
+  rollback: false
+
 
 # prod is a more complex production environment
 - name: prod
-  type: PROD  # One of DEV/STAGE/PROD
+  cluster_type: PROD  # One of DEV/STAGE/PROD
 
   containers:
   - id: some_container
@@ -143,7 +112,7 @@ environments:
       path: /health
     cpus: 4
     mem: 400
-    instances: 10
+    instances: 3
   # The prod environment additionally defines a worker variant of the service's
   # codebase to be run
   - id: some_worker_container
@@ -151,7 +120,7 @@ environments:
     dockerfile_path: Dockerfile.worker
     cpus: 8
     mem: 1024
-    instances: 4
+    instances: 2
   # And lastly a simple cron job
   - id: some_cron_container
     topology: cron
@@ -195,11 +164,7 @@ environments:
       type: s3
       s3_bucket: some-service-builds-us-east-1
 
-  jenkins:
-    rollback: false
-    params:
-    - name: param3
-      type: string
-      default_value: value3
+  rollback: true
+
 
 # [1] matches Marathon app definition https://mesosphere.github.io/marathon/docs/application-basics.html
