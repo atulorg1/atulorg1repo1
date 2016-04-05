@@ -87,7 +87,7 @@ environments:
     # S3 is the only option porter currently supports
     service_distribution:
       # [s3|docker_registry]
-      type: s3
+      cluster_type: s3
       # If type is s3, prefix its options with s3_
       # The bucket into which the service payload will be uploaded by porter
       # in GoCD, and then downloaded by porter on an EC2 instance
@@ -143,7 +143,7 @@ environments:
     key_pair_name: some-production-key
 
     service_distribution:
-      type: s3
+      cluster_type: s3
       s3_bucket: some-service-builds-us-west-2
 
   - name: us-east-1
@@ -154,13 +154,12 @@ environments:
 
     role_arn: arn:aws:iam::123456789012:role/some-service-deployment
 
-    elb:
-    - {name: some-service-production, tag: prod}
+    elb: some-service-production
 
     key_pair_name: some-production-key
 
     service_distribution:
-      type: s3
+      cluster_type: s3
       s3_bucket: some-service-builds-us-east-1
 
 
