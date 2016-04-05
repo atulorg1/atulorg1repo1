@@ -137,8 +137,7 @@ environments:
 
     role_arn: arn:aws:iam::123456789012:role/some-service-deployment
 
-    elb:
-    - {name: some-service-production, tag: prod}
+    elb: some-service-production
 
     key_pair_name: some-production-key
 
