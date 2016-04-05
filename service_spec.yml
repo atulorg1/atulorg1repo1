@@ -96,9 +96,6 @@ environments:
       # If type is docker_registry, prefix its options with docker_registry_
       # docker_registry_url: http://somedomain.com
 
-  # Optional
-  rollback: false
-
 
 # prod is a more complex production environment
 - name: prod
