@@ -59,7 +59,6 @@ environments:
 
   - id: hello-orca-migrate-db
     topology: worker
-    docker_run_cmd: --opt foo
     cpus: 0.5
     mem: 512
     instances: 1
