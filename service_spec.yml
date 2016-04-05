@@ -46,7 +46,7 @@ environments:
     # Optional. override CMD. e.g., `docker run image:latest <docker_run_cmd>`
     docker_run_cmd: --opt foo
     # Optional. Required, if one or more ports need to be exposed. Comma separated list of exposed ports.
-    inet_port: 3000, 3001
+    inet_port: 3000
     # Required. HTTP GET is assumed here.
     health_check:
       path: /health
