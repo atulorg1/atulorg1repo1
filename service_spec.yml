@@ -29,6 +29,9 @@ environments:
 
   # Required. "type" is one of DEV/STAGE/PROD. Based on this appropriate Mesos cluster may get selected.
   cluster_type: DEV
+  # Optional. Rollback on deploy failure. Default is false
+  # ethos-only
+  rollback_on_failure: false
   # Required. List of containers for the service.
   containers:
   # see footnote [1]
@@ -101,7 +104,7 @@ environments:
 # prod is a more complex production environment
 - name: prod
   cluster_type: PROD  # One of DEV/STAGE/PROD
-
+  rollback_on_failure: true
   containers:
   - id: some_container
     topology: inet
@@ -163,8 +166,6 @@ environments:
     service_distribution:
       type: s3
       s3_bucket: some-service-builds-us-east-1
-
-  rollback: true
 
 
 # [1] matches Marathon app definition https://mesosphere.github.io/marathon/docs/application-basics.html
