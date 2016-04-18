@@ -51,9 +51,9 @@ environments:
     health_check:
       path: /health
     # Optional. (Default = 1). Number of containers for this service
-    instances: 3
+    instances: 1
     # Optional. (Default = 0.5) Number of CPU(s) Required by this container.
-    cpus: 1.5
+    cpus: 1
     # Optional. (Default = 512). Memory required by this container.
     mem: 1024
 
@@ -96,6 +96,38 @@ environments:
       # If type is docker_registry, prefix its options with docker_registry_
       # docker_registry_url: http://somedomain.com
 
+- name: qe1
+
+  cluster_type: DEV
+  rollback_on_failure: false
+  containers:
+  - id: atul1-server
+    topology: inet
+    schedule: 00 09-18 * * *
+    dockerfile_path: Dockerfile
+    docker_run_cmd: --opt foo
+    inet_port: 3000
+    health_check:
+      path: /health
+    instances: 2
+    cpus: 1
+    mem: 1024
+
+  - id: atul1-migrate-db
+    topology: worker
+    cpus: 0.5
+    mem: 512
+    instances: 1
+
+  regions:
+  - name: us-west-2
+    availability_zones:
+    - {name: us-west-2a, subnet_id: ''}
+    role_arn: arn:aws:iam::123456789012:role/some-service-deployment
+    key_pair_name: some-developer-key
+    service_distribution:
+      cluster_type: s3
+      s3_bucket: some-service-builds-us-west-2
 
 # prod is a more complex production environment
 - name: prod
