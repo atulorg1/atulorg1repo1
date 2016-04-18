@@ -1,5 +1,5 @@
 # Required. User friendly name of the service.
-service_name: helloorca1
+service_name: atulrepo1
 
 # Version lock the platform dependency. Use semantic versioning.
 porter_version: v0.0.1
@@ -36,7 +36,7 @@ environments:
   containers:
   # see footnote [1]
   # Required. User friendly image ID for this container image.
-  - id: hello-orca-server
+  - id: atul1-server
     # Required. Allowed values: [inet|worker|cron].
     topology: inet
     # Optional (Default = one time). Revlevant for worker|cron. Linux crontab format.
@@ -57,7 +57,7 @@ environments:
     # Optional. (Default = 512). Memory required by this container.
     mem: 1024
 
-  - id: hello-orca-migrate-db
+  - id: atul1-migrate-db
     topology: worker
     cpus: 0.5
     mem: 512
