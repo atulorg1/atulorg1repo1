@@ -44,7 +44,7 @@ environments:
     # Optional. Required if more than one container is defined
     dockerfile_path: Dockerfile
     # Optional. override CMD. e.g., `docker run image:latest <docker_run_cmd>`
-    docker_run_cmd: --opt foo
+    docker_run_cmd: --opt dev1dummy
     # Optional. Required, if one or more ports need to be exposed. Comma separated list of exposed ports.
     inet_port: 3000
     # Required. HTTP GET is assumed here.
@@ -105,11 +105,43 @@ environments:
     topology: inet
     schedule: 00 09-18 * * *
     dockerfile_path: Dockerfile
-    docker_run_cmd: --opt foo
+    docker_run_cmd: --opt qe1dummy
     inet_port: 3000
     health_check:
       path: /health
     instances: 2
+    cpus: 1
+    mem: 1024
+
+  - id: atul1-migrate-db
+    topology: worker
+    cpus: 0.5
+    mem: 512
+    instances: 1
+
+  regions:
+  - name: us-west-2
+    availability_zones:
+    - {name: us-west-2a, subnet_id: ''}
+    role_arn: arn:aws:iam::123456789012:role/some-service-deployment
+    key_pair_name: some-developer-key
+    service_distribution:
+      cluster_type: s3
+      s3_bucket: some-service-builds-us-west-2
+
+- name: stage
+
+  cluster_type: STAGE
+  rollback_on_failure: false
+  containers:
+  - id: atul1-server
+    topology: inet
+    dockerfile_path: Dockerfile
+    docker_run_cmd: --opt stagedummy
+    inet_port: 3000
+    health_check:
+      path: /health
+    instances: 3
     cpus: 1
     mem: 1024
 
