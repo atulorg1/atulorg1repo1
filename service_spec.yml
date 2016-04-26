@@ -133,6 +133,7 @@ environments:
 
   cluster_type: STAGE
   rollback_on_failure: false
+  containers:
   regions:
   - name: us-west-2
     availability_zones:
