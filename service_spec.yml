@@ -133,24 +133,6 @@ environments:
 
   cluster_type: STAGE
   rollback_on_failure: false
-  containers:
-  - id: atul1-server
-    topology: inet
-    dockerfile_path: Dockerfile
-    docker_run_cmd: --opt stagedummy
-    inet_port: 3000
-    health_check:
-      path: /health
-    instances: 3
-    cpus: 1
-    mem: 1024
-
-  - id: atul1-migrate-db
-    topology: worker
-    cpus: 0.5
-    mem: 512
-    instances: 1
-
   regions:
   - name: us-west-2
     availability_zones:
