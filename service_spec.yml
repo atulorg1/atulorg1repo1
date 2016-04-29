@@ -76,7 +76,7 @@ environments:
     - {name: us-east-1a, subnet_id: ''}
     # This is the role ARN porter needs to do
     # http://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html
-    role_arn: arn:aws:iam::123456789012:role/some-service-deployment
+    role_arn: arn:aws:iam::961382463089:role/atulrole1
     # Not defined for a developer environment
     # elb:
 
@@ -123,7 +123,7 @@ environments:
   - name: us-east-1
     availability_zones:
     - {name: us-east-1a, subnet_id: ''}
-    role_arn: arn:aws:iam::123456789012:role/some-service-deployment
+    role_arn: arn:aws:iam::961382463089:role/atulrole1
     key_pair_name: some-developer-key
     service_distribution:
       cluster_type: s3
