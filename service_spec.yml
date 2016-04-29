@@ -67,13 +67,13 @@ environments:
   # Required.
   regions:
   # Our developers are based in Seattle, in this example
-  - name: us-west-2
+  - name: us-east-1
     # AZs are heterogeneous.
     # Some don't work with others and certain instance types can only deploy to
     # certain AZs. For a custom VPC (i.e. not EC2-Classic or Default VPC) we
     # additionally need the subnet ID
     availability_zones:
-    - {name: us-west-2a, subnet_id: ''}
+    - {name: us-east-1a, subnet_id: ''}
     # This is the role ARN porter needs to do
     # http://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html
     role_arn: arn:aws:iam::123456789012:role/some-service-deployment
@@ -91,7 +91,7 @@ environments:
       # If type is s3, prefix its options with s3_
       # The bucket into which the service payload will be uploaded by porter
       # in GoCD, and then downloaded by porter on an EC2 instance
-      s3_bucket: some-service-builds-us-west-2
+      s3_bucket: some-service-builds-us-east-1
 
       # If type is docker_registry, prefix its options with docker_registry_
       # docker_registry_url: http://somedomain.com
@@ -120,14 +120,14 @@ environments:
     instances: 1
 
   regions:
-  - name: us-west-2
+  - name: us-east-1
     availability_zones:
-    - {name: us-west-2a, subnet_id: ''}
+    - {name: us-east-1a, subnet_id: ''}
     role_arn: arn:aws:iam::123456789012:role/some-service-deployment
     key_pair_name: some-developer-key
     service_distribution:
       cluster_type: s3
-      s3_bucket: some-service-builds-us-west-2
+      s3_bucket: some-service-builds-us-east-1
 
 - name: stage
 
@@ -152,14 +152,14 @@ environments:
     instances: 1
 
   regions:
-  - name: us-west-2
+  - name: us-east-1
     availability_zones:
-    - {name: us-west-2a, subnet_id: ''}
+    - {name: us-east-1a, subnet_id: ''}
     role_arn: arn:aws:iam::123456789012:role/some-service-deployment
     key_pair_name: some-developer-key
     service_distribution:
       cluster_type: s3
-      s3_bucket: some-service-builds-us-west-2
+      s3_bucket: some-service-builds-us-east-1
 
 # prod is a more complex production environment
 - name: prod
@@ -193,11 +193,11 @@ environments:
     instances: 1
 
   regions:
-  - name: us-west-2
+  - name: us-east-1
     availability_zones:
-    - {name: us-west-2a, subnet_id: ''}
-    - {name: us-west-2b, subnet_id: ''}
-    - {name: us-west-2c, subnet_id: ''}
+    - {name: us-east-1a, subnet_id: ''}
+    - {name: us-east-1b, subnet_id: ''}
+    - {name: us-east-1c, subnet_id: ''}
 
     role_arn: arn:aws:iam::123456789012:role/some-service-deployment
 
@@ -207,7 +207,7 @@ environments:
 
     service_distribution:
       cluster_type: s3
-      s3_bucket: some-service-builds-us-west-2
+      s3_bucket: some-service-builds-us-east-1
 
   - name: us-east-1
     availability_zones:
