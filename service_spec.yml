@@ -209,11 +209,11 @@ environments:
       cluster_type: s3
       s3_bucket: some-service-builds-us-east-1
 
-  - name: us-west-1
+  - name: us-west-2
     availability_zones:
-    - {name: us-west-1a, subnet_id: ''}
-    - {name: us-west-1b, subnet_id: ''}
-    - {name: us-west-1c, subnet_id: ''}
+    - {name: us-west-2a, subnet_id: ''}
+    - {name: us-west-2b, subnet_id: ''}
+    - {name: us-west-2c, subnet_id: ''}
 
     role_arn: arn:aws:iam::961382463089:role/atulprod
 
